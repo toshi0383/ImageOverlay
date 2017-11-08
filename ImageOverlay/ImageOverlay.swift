@@ -38,6 +38,7 @@ extension UIImageView {
         self.clipsToBounds = false
         v.clipsToBounds = false
         layers.forEach {
+            $0.frame = CGRect(origin: $0.bounds.origin, size: $0.bounds.size)
             v.layer.addSublayer($0)
         }
     }
