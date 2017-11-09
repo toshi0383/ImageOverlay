@@ -11,6 +11,10 @@ import UIKit
 
 extension UIImageView: NameSpaceCompatible { }
 
+private struct AssociatedKeys {
+    static var overlayContentView = "ImageOverlay.overlayContentView"
+}
+
 extension NameSpace where Base: UIImageView {
     public func clearOverlays() {
         if #available(tvOS 11.0, *) {
@@ -48,6 +52,17 @@ extension NameSpace where Base: UIImageView {
                     self.base.image = packaged
                 }
             }
+        }
+    }
+    public var overlayContentView: UIView? {
+        set {
+            objc_setAssociatedObject(self, &AssociatedKeys.overlayContentView, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            if let image = base.image, let view = newValue {
+                addOverlays(with: image, overlays: [AnyViewAsOverlay(view: view)])
+            }
+        }
+        get {
+            return objc_getAssociatedObject(self, &AssociatedKeys.overlayContentView) as? UIView
         }
     }
 }
