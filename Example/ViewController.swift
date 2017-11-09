@@ -26,11 +26,7 @@ class ViewController: UICollectionViewController {
     }
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CollectionViewCell
-        if indexPath.item % 3 == 0 {
-            cell.configureWithView()
-        } else {
-            cell.configureWithBuiltInProtocols()
-        }
+        cell.configure(indexPath: indexPath)
         return cell
     }
 }

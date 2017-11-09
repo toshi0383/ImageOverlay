@@ -57,7 +57,6 @@ extension UIImageView {
     func addOverlays(layers: [CALayer], image: UIImage) {
         let v = self.overlayContentView
         self.image = image
-        self.clipsToBounds = false
         v.clipsToBounds = false
         layers.forEach {
             v.layer.addSublayer($0)
