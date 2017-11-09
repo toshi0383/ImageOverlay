@@ -10,6 +10,7 @@ import ImageOverlay
 import UIKit
 
 struct ViewAsOverlay: OverlayViewProtocol {
+    let needsRendering: Bool = true
     var view: UIView {
         let frame = CGRect(x: 100.25, y: 0, width: 200, height: 112.5)
         let v = UIView(frame: frame)

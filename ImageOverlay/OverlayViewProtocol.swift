@@ -15,7 +15,9 @@ public protocol OverlayViewProtocol: OverlayProtocol {
 extension OverlayViewProtocol {
     public var layers: [CALayer] {
         let layers = view.getLayersRecursively()
-        layers.forEach { $0.scaleRecursively() }
+        if needsRendering {
+            layers.forEach { $0.scaleRecursively(2) }
+        }
         return layers
     }
 }
@@ -30,12 +32,12 @@ extension UIView {
 }
 
 extension CALayer {
-    func scaleRecursively() {
+    func scaleRecursively(_ scale: CGFloat) {
         let origin = CGPoint(x: position.x - bounds.width / 2, y: position.y - bounds.height / 2)
-        frame = CGRect(origin: origin, size: bounds.size).scaled(Scale.value)
+        frame = CGRect(origin: origin, size: bounds.size).scaled(scale)
         guard let sublayers = sublayers else { return }
         for sublayer in sublayers {
-            sublayer.scaleRecursively()
+            sublayer.scaleRecursively(scale)
         }
     }
     func applySuperLayersFrameOrigin() {
