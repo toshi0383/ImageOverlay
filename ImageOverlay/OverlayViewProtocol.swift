@@ -15,8 +15,10 @@ public protocol OverlayViewProtocol: OverlayProtocol {
 extension OverlayViewProtocol {
     public var layers: [CALayer] {
         let layers = view.getLayersRecursively()
-        if needsRendering {
-            layers.forEach { $0.scaleRecursively(2) }
+        if #available(tvOS 11.0, *) {
+            if needsRendering {
+                layers.forEach { $0.scaleRecursively(2) }
+            }
         }
         return layers
     }

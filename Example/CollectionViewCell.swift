@@ -9,6 +9,7 @@
 import ImageOverlay
 import UIKit
 
+/// On tvOS10 or earlier, this is treated as ViewAsImage anyways.
 struct ViewAsOverlay: OverlayViewProtocol {
     var view: UIView {
         let frame = CGRect(x: 100.25, y: 0, width: 200, height: 112.5)
@@ -29,10 +30,11 @@ struct ViewAsOverlay: OverlayViewProtocol {
     }
 }
 
+/// Set needsRendering to true if you want this view rendered as UIImage on tvOS11
 struct ViewAsImage: OverlayViewProtocol {
     let needsRendering: Bool = true
     var view: UIView {
-        let frame = CGRect(x: 0, y: 190, width: 400, height: 30)
+        let frame = CGRect(x: 0, y: 190, width: 400, height: 35)
         let v = UIView(frame: frame)
         v.backgroundColor = .green
         v.alpha = 0.4
