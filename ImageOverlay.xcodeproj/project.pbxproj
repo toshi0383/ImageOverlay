@@ -118,8 +118,8 @@
 				1F1949E21FB3EE7D008AF2F2 /* OverlayViewProtocol.swift */,
 				1F4A78F81FB3BBAA0070C1CC /* TextOverlay.swift */,
 				1F4A78FA1FB3C8160070C1CC /* AlphaGradientOverlay.swift */,
-				1F4A78FC1FB3C91B0070C1CC /* Utilities.swift */,
 				1F4A78FE1FB3C9E80070C1CC /* FillAspectRatioOverlay.swift */,
+				1F4A78FC1FB3C91B0070C1CC /* Utilities.swift */,
 				1F4A79001FB3CF6F0070C1CC /* Scale.swift */,
 			);
 			path = ImageOverlay;

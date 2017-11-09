@@ -31,8 +31,8 @@ extension UIView {
 
 extension CALayer {
     func scaleRecursively() {
-        let origin = CGPoint(x: position.x - bounds.width / 2, y: position.y - bounds.height / 2).scaled(Scale.value)
-        frame = CGRect(origin: origin, size: bounds.size.scaled(Scale.value))
+        let origin = CGPoint(x: position.x - bounds.width / 2, y: position.y - bounds.height / 2)
+        frame = CGRect(origin: origin, size: bounds.size).scaled(Scale.value)
         guard let sublayers = sublayers else { return }
         for sublayer in sublayers {
             sublayer.scaleRecursively()

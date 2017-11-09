@@ -10,6 +10,11 @@ import Foundation
 
 public protocol OverlayProtocol {
     var layers: [CALayer] { get }
+    var needsRendering: Bool { get }
 }
 
-public protocol OverlayLayerProtocol: OverlayProtocol { }
+extension OverlayProtocol {
+    public var needsRendering: Bool {
+        return false
+    }
+}

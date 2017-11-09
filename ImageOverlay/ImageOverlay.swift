@@ -22,11 +22,24 @@ extension NameSpace where Base: UIImageView {
         }
     }
     public func addOverlays(with image: UIImage, overlays: [OverlayProtocol]) {
-        let layers: [CALayer] = overlays.flatMap { $0.layers }
+        let size = base.bounds.size
         if #available(tvOS 11.0, *) {
-            base.addOverlays(layers: layers, image: image)
+            let layersAsImage = overlays.filter { $0.needsRendering }.flatMap { $0.layers }
+            let layersAsOverlay = overlays.filter { !$0.needsRendering }.flatMap { $0.layers }
+            if layersAsImage.isEmpty {
+                base.addOverlays(layers: layersAsOverlay, image: image)
+            } else {
+                DispatchQueue.global().async {
+                    guard let packaged = image.packaged(layers: layersAsImage, size: size) else {
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        self.base.addOverlays(layers: layersAsOverlay, image: packaged)
+                    }
+                }
+            }
         } else {
-            let size = base.bounds.size
+            let layers: [CALayer] = overlays.flatMap { $0.layers }
             DispatchQueue.global().async {
                 guard let packaged = image.packaged(layers: layers, size: size) else {
                     return

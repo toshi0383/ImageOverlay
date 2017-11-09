@@ -9,10 +9,11 @@
 import AVFoundation
 import Foundation
 
-public struct TextOverlay: OverlayLayerProtocol {
+public struct TextOverlay: OverlayProtocol {
     public let layers: [CALayer]
+    public let needsRendering: Bool = true
     public init(text: String, font: UIFont, foregroundColor: UIColor = .white, size: CGSize, textOrigin: CGPoint) {
-        let textLayer = _textLayer(text: text, font: font, foregroundColor: foregroundColor, origin: textOrigin, size: size, scale: Scale.value)
+        let textLayer = _textLayer(text: text, font: font, foregroundColor: foregroundColor, origin: textOrigin, size: size, scale: 2)
         self.layers = [textLayer]
     }
 }

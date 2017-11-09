@@ -9,10 +9,11 @@
 import AVFoundation
 import Foundation
 
-public struct FillAspectRatioOverlay: OverlayLayerProtocol {
+public struct FillAspectRatioOverlay: OverlayProtocol {
     public let layers: [CALayer]
+    public let needsRendering: Bool = true
     public init(image: UIImage, size: CGSize) {
-        let scaledSize = size.scaled(Scale.value)
+        let scaledSize = size.scaled(2) // scale is always 2 when needsRendering is true
         let rect = AVMakeRect(aspectRatio: image.size, insideRect: CGRect(origin: .zero, size: scaledSize))
         self.layers = _blackLayers(imageRect: rect, targetSize: scaledSize)
     }
