@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F4A78F71FB3BB960070C1CC /* OverlayProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4A78F61FB3BB960070C1CC /* OverlayProtocol.swift */; };
+		1F4A78F91FB3BBAA0070C1CC /* TextOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4A78F81FB3BBAA0070C1CC /* TextOverlay.swift */; };
+		1F4A78FB1FB3C8160070C1CC /* AlphaGradientOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4A78FA1FB3C8160070C1CC /* AlphaGradientOverlay.swift */; };
+		1F4A78FD1FB3C91B0070C1CC /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4A78FC1FB3C91B0070C1CC /* Utilities.swift */; };
+		1F4A78FF1FB3C9E80070C1CC /* FillAspectRatioOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4A78FE1FB3C9E80070C1CC /* FillAspectRatioOverlay.swift */; };
+		1F4A79011FB3CF6F0070C1CC /* Scale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4A79001FB3CF6F0070C1CC /* Scale.swift */; };
 		1FF49A4B1FB39719000DF87E /* ImageOverlay.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FF49A491FB39719000DF87E /* ImageOverlay.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FF49A521FB39722000DF87E /* ImageOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF49A511FB39722000DF87E /* ImageOverlay.swift */; };
 		1FF49A541FB397E5000DF87E /* NameSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF49A531FB397E5000DF87E /* NameSpace.swift */; };
@@ -43,6 +49,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1F4A78F61FB3BB960070C1CC /* OverlayProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayProtocol.swift; sourceTree = "<group>"; };
+		1F4A78F81FB3BBAA0070C1CC /* TextOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextOverlay.swift; sourceTree = "<group>"; };
+		1F4A78FA1FB3C8160070C1CC /* AlphaGradientOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphaGradientOverlay.swift; sourceTree = "<group>"; };
+		1F4A78FC1FB3C91B0070C1CC /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		1F4A78FE1FB3C9E80070C1CC /* FillAspectRatioOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillAspectRatioOverlay.swift; sourceTree = "<group>"; };
+		1F4A79001FB3CF6F0070C1CC /* Scale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scale.swift; sourceTree = "<group>"; };
 		1FF49A461FB39719000DF87E /* ImageOverlay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ImageOverlay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FF49A491FB39719000DF87E /* ImageOverlay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageOverlay.h; sourceTree = "<group>"; };
 		1FF49A4A1FB39719000DF87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -100,6 +112,12 @@
 				1FF49A4A1FB39719000DF87E /* Info.plist */,
 				1FF49A511FB39722000DF87E /* ImageOverlay.swift */,
 				1FF49A531FB397E5000DF87E /* NameSpace.swift */,
+				1F4A78F61FB3BB960070C1CC /* OverlayProtocol.swift */,
+				1F4A78F81FB3BBAA0070C1CC /* TextOverlay.swift */,
+				1F4A78FA1FB3C8160070C1CC /* AlphaGradientOverlay.swift */,
+				1F4A78FC1FB3C91B0070C1CC /* Utilities.swift */,
+				1F4A78FE1FB3C9E80070C1CC /* FillAspectRatioOverlay.swift */,
+				1F4A79001FB3CF6F0070C1CC /* Scale.swift */,
 			);
 			path = ImageOverlay;
 			sourceTree = "<group>";
@@ -232,8 +250,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F4A78FD1FB3C91B0070C1CC /* Utilities.swift in Sources */,
+				1F4A78FF1FB3C9E80070C1CC /* FillAspectRatioOverlay.swift in Sources */,
+				1F4A78F71FB3BB960070C1CC /* OverlayProtocol.swift in Sources */,
 				1FF49A521FB39722000DF87E /* ImageOverlay.swift in Sources */,
 				1FF49A541FB397E5000DF87E /* NameSpace.swift in Sources */,
+				1F4A78F91FB3BBAA0070C1CC /* TextOverlay.swift in Sources */,
+				1F4A79011FB3CF6F0070C1CC /* Scale.swift in Sources */,
+				1F4A78FB1FB3C8160070C1CC /* AlphaGradientOverlay.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
