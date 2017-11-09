@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct AlphaGradientOverlay: OverlayProtocol {
+public struct AlphaGradientOverlay: OverlayLayerProtocol {
     public let layers: [CALayer]
     public enum Position {
         case bottom(gradientStartY: CGFloat)
@@ -23,7 +23,7 @@ public struct AlphaGradientOverlay: OverlayProtocol {
         layer.endPoint = CGPoint(x: 0.5, y: 1.0)
         layer.colors = colors.map { $0.cgColor }
         let scaledSize = size.scaled(Scale.value)
-        layer.bounds = CGRect(origin: .zero, size: scaledSize)
+        layer.frame = CGRect(origin: .zero, size: scaledSize)
         self.layers = [layer]
     }
 }

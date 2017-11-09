@@ -9,7 +9,7 @@
 import AVFoundation
 import Foundation
 
-public struct TextOverlay: OverlayProtocol {
+public struct TextOverlay: OverlayLayerProtocol {
     public let layers: [CALayer]
     public init(text: String, font: UIFont, foregroundColor: UIColor = .white, size: CGSize, textOrigin: CGPoint) {
         let textLayer = _textLayer(text: text, font: font, foregroundColor: foregroundColor, origin: textOrigin, size: size, scale: Scale.value)
@@ -30,7 +30,7 @@ private func _textLayer(text: String, font: UIFont, foregroundColor: UIColor, or
     textLayer.alignmentMode = kCAAlignmentCenter
     textLayer.contentsScale = UIScreen.main.scale
     let _layer = CALayer()
-    _layer.bounds = CGRect(origin: .zero, size: size.scaled(scale))
+    _layer.frame = CGRect(origin: .zero, size: size.scaled(scale))
     _layer.backgroundColor = UIColor.clear.cgColor
     _layer.contentsScale = UIScreen.main.scale
     _layer.addSublayer(textLayer)

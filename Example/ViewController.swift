@@ -13,7 +13,7 @@ class ViewController: UICollectionViewController {
     private let items: [Int] = (0..<28).map { $0 }
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView?.contentInset = UIEdgeInsets(top: 0, left: 90, bottom: 0, right: 90)
+        collectionView?.contentInset = UIEdgeInsets(top: 60, left: 90, bottom: 60, right: 90)
         if #available(tvOS 11.0, *) {
             collectionView?.contentInsetAdjustmentBehavior = .never
         }
@@ -26,7 +26,11 @@ class ViewController: UICollectionViewController {
     }
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CollectionViewCell
-        cell.configure()
+        if indexPath.item % 3 == 0 {
+            cell.configureWithView()
+        } else {
+            cell.configureWithBuiltInProtocols()
+        }
         return cell
     }
 }

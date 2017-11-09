@@ -31,3 +31,29 @@ extension CGPoint {
         return CGPoint(x: self.x * scale, y: self.y * scale)
     }
 }
+
+extension CGRect {
+    func scaled(_ scale: CGFloat) -> CGRect {
+        return CGRect(origin: origin.scaled(scale), size: size.scaled(scale))
+    }
+}
+
+extension UIView {
+    func removeAllChildren() {
+        UIView.performWithoutAnimation {
+            subviews.forEach { $0.removeAllChildren() }
+            removeFromSuperview()
+        }
+    }
+}
+
+extension CALayer {
+    func removeAllChildren() {
+        UIView.performWithoutAnimation {
+            if let sublayers = sublayers {
+                sublayers.forEach { $0.removeAllChildren() }
+            }
+            removeFromSuperlayer()
+        }
+    }
+}

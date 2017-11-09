@@ -11,3 +11,5 @@ import Foundation
 public protocol OverlayProtocol {
     var layers: [CALayer] { get }
 }
+
+public protocol OverlayLayerProtocol: OverlayProtocol { }

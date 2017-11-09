@@ -9,6 +9,26 @@
 import ImageOverlay
 import UIKit
 
+struct ViewAsOverlay: OverlayViewProtocol {
+    var view: UIView {
+        let frame = CGRect(x: 100.25, y: 0, width: 200, height: 112.5)
+        let v = UIView(frame: frame)
+        v.backgroundColor = .red
+        v.alpha = 0.3
+        let child = UIView()
+        child.backgroundColor = .blue
+        child.translatesAutoresizingMaskIntoConstraints = false
+        v.addSubview(child)
+        NSLayoutConstraint.activate([
+            child.centerXAnchor.constraint(equalTo: v.centerXAnchor),
+            child.centerYAnchor.constraint(equalTo: v.centerYAnchor),
+            child.widthAnchor.constraint(equalToConstant: 50),
+            child.heightAnchor.constraint(equalToConstant: 50),
+        ])
+        return v
+    }
+}
+
 final class CollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var imageView: UIImageView! {
         didSet {
@@ -16,7 +36,16 @@ final class CollectionViewCell: UICollectionViewCell {
             imageView.adjustsImageWhenAncestorFocused = true
         }
     }
-    func configure() {
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageView.io.clearOverlays()
+    }
+    func configureWithView() {
+        let image = UIImage(named: "Italy1")!
+        let overlays: [OverlayProtocol] = [ViewAsOverlay()]
+        imageView.io.addOverlays(with: image, overlays: overlays)
+    }
+    func configureWithBuiltInProtocols() {
         let image = UIImage(named: "Italy1")!
         let size = imageView.bounds.size
         let blackFillOverlay = FillAspectRatioOverlay(image: image, size: size)
@@ -27,6 +56,6 @@ final class CollectionViewCell: UICollectionViewCell {
         let textOrigin = CGPoint(x: 16, y: imageView.frame.height - 22 - 22)
         let textOverlay = TextOverlay(text: "CATCHUP", font: UIFont.boldSystemFont(ofSize: 22), foregroundColor: .white, size: size, textOrigin: textOrigin)
         let overlays: [OverlayProtocol] = [blackFillOverlay, alphaOverlay, textOverlay]
-        imageView.io.setImage(image, overlays: overlays)
+        imageView.io.addOverlays(with: image, overlays: overlays)
     }
 }

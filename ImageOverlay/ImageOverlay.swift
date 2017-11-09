@@ -12,8 +12,17 @@ import UIKit
 extension UIImageView: NameSpaceCompatible { }
 
 extension NameSpace where Base: UIImageView {
-    public func setImage(_ image: UIImage, overlays: [OverlayProtocol]) {
-        let layers = overlays.flatMap { $0.layers }
+    public func clearOverlays() {
+        if #available(tvOS 11.0, *) {
+            base.overlayContentView.removeAllChildren()
+            base.overlayContentView.layer.removeAllChildren()
+            base.image = nil
+        } else {
+            base.image = nil
+        }
+    }
+    public func addOverlays(with image: UIImage, overlays: [OverlayProtocol]) {
+        let layers: [CALayer] = overlays.flatMap { $0.layers }
         if #available(tvOS 11.0, *) {
             base.addOverlays(layers: layers, image: image)
         } else {
@@ -38,7 +47,6 @@ extension UIImageView {
         self.clipsToBounds = false
         v.clipsToBounds = false
         layers.forEach {
-            $0.frame = CGRect(origin: $0.bounds.origin, size: $0.bounds.size)
             v.layer.addSublayer($0)
         }
     }
@@ -52,6 +60,7 @@ extension UIImage {
         if let context = UIGraphicsGetCurrentContext() {
             self.draw(in: rect)
             for layer in layers {
+                layer.bounds = layer.frame // for OverlayViewProtocol support
                 layer.render(in: context)
             }
         }

@@ -9,7 +9,7 @@
 import AVFoundation
 import Foundation
 
-public struct FillAspectRatioOverlay: OverlayProtocol {
+public struct FillAspectRatioOverlay: OverlayLayerProtocol {
     public let layers: [CALayer]
     public init(image: UIImage, size: CGSize) {
         let scaledSize = size.scaled(Scale.value)
@@ -24,7 +24,7 @@ private func _blackLayers(imageRect rect: CGRect, targetSize: CGSize) -> [CALaye
         return [0, targetSize.width - width].map { (x: CGFloat) in
             let horizontalFiller = CALayer()
             horizontalFiller.backgroundColor = UIColor.black.cgColor
-            horizontalFiller.bounds = CGRect(x: x, y: 0, width: width, height: targetSize.height)
+            horizontalFiller.frame = CGRect(x: x, y: 0, width: width, height: targetSize.height)
             return horizontalFiller
         }
     } else if rect.height < targetSize.height {
@@ -32,7 +32,7 @@ private func _blackLayers(imageRect rect: CGRect, targetSize: CGSize) -> [CALaye
         return [0, targetSize.height - height].map { (y: CGFloat) in
             let verticalFiller = CALayer()
             verticalFiller.backgroundColor = UIColor.black.cgColor
-            verticalFiller.bounds = CGRect(x: 0, y: y, width: targetSize.width, height: height)
+            verticalFiller.frame = CGRect(x: 0, y: y, width: targetSize.width, height: height)
             return verticalFiller
         }
     }
