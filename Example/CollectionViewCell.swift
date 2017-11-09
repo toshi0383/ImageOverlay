@@ -38,6 +38,10 @@ struct ViewAsImage: OverlayViewProtocol {
         let v = UIView(frame: frame)
         v.backgroundColor = .green
         v.alpha = 0.4
+        let child = UIView(frame: CGRect(x: 100, y: 8.75, width: 200, height: 17.5))
+        child.backgroundColor = .white
+        child.alpha = 1.0
+        v.addSubview(child)
         return v
     }
 }
