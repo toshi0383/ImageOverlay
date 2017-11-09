@@ -21,7 +21,7 @@
 		1FF49A5E1FB39A03000DF87E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF49A5D1FB39A03000DF87E /* ViewController.swift */; };
 		1FF49A611FB39A03000DF87E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FF49A5F1FB39A03000DF87E /* Main.storyboard */; };
 		1FF49A631FB39A03000DF87E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FF49A621FB39A03000DF87E /* Assets.xcassets */; };
-		1FF49A691FB39B11000DF87E /* CollectionVIewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF49A681FB39B11000DF87E /* CollectionVIewCell.swift */; };
+		1FF49A691FB39B11000DF87E /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF49A681FB39B11000DF87E /* CollectionViewCell.swift */; };
 		1FF49A6D1FB39DB6000DF87E /* ImageOverlay.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1FF49A461FB39719000DF87E /* ImageOverlay.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
@@ -68,7 +68,7 @@
 		1FF49A601FB39A03000DF87E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1FF49A621FB39A03000DF87E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1FF49A641FB39A03000DF87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1FF49A681FB39B11000DF87E /* CollectionVIewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionVIewCell.swift; sourceTree = "<group>"; };
+		1FF49A681FB39B11000DF87E /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,7 +130,7 @@
 			children = (
 				1FF49A5B1FB39A03000DF87E /* AppDelegate.swift */,
 				1FF49A5D1FB39A03000DF87E /* ViewController.swift */,
-				1FF49A681FB39B11000DF87E /* CollectionVIewCell.swift */,
+				1FF49A681FB39B11000DF87E /* CollectionViewCell.swift */,
 				1FF49A5F1FB39A03000DF87E /* Main.storyboard */,
 				1FF49A621FB39A03000DF87E /* Assets.xcassets */,
 				1FF49A641FB39A03000DF87E /* Info.plist */,
@@ -271,7 +271,7 @@
 			files = (
 				1FF49A5E1FB39A03000DF87E /* ViewController.swift in Sources */,
 				1FF49A5C1FB39A03000DF87E /* AppDelegate.swift in Sources */,
-				1FF49A691FB39B11000DF87E /* CollectionVIewCell.swift in Sources */,
+				1FF49A691FB39B11000DF87E /* CollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

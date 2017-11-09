@@ -1,5 +1,5 @@
 //
-//  CollectionVIewCell.swift
+//  CollectionViewCell.swift
 //  Example
 //
 //  Created by Toshihiro Suzuki on 2017/11/09.
