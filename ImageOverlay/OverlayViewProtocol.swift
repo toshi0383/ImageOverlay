@@ -18,10 +18,10 @@ extension OverlayViewProtocol {
         let layers = view.getLayersRecursively()
         if #available(tvOS 11.0, *) {
             if needsRendering {
-                layers.forEach { $0.scaleRecursively(2) }
+                layers.forEach { $0.scale(2) }
             }
         } else {
-            layers.forEach { $0.scaleRecursively(2) }
+            layers.forEach { $0.scale(2) }
         }
         return layers
     }
@@ -29,7 +29,10 @@ extension OverlayViewProtocol {
 
 extension UIView {
     func getLayersRecursively() -> [CALayer] {
+        // NOTE: This recursive layoutIfNeeded() is required.
+        //   Children's frame aren't updated by parent's layoutIfNeeded()
         layoutIfNeeded()
+
         let sublayers = subviews.map { $0.getLayersRecursively() }.flatMap { $0 }
         sublayers.forEach { $0.applySuperLayersFrameOrigin() }
         return [layer] + sublayers
@@ -37,13 +40,9 @@ extension UIView {
 }
 
 extension CALayer {
-    func scaleRecursively(_ scale: CGFloat) {
+    func scale(_ scale: CGFloat) {
         let origin = CGPoint(x: position.x - bounds.width / 2, y: position.y - bounds.height / 2)
         frame = CGRect(origin: origin, size: bounds.size).scaled(scale)
-        guard let sublayers = sublayers else { return }
-        for sublayer in sublayers {
-            sublayer.scaleRecursively(scale)
-        }
     }
     func applySuperLayersFrameOrigin() {
         guard let parent = superlayer else { return }

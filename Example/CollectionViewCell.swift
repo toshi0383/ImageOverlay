@@ -60,15 +60,15 @@ final class CollectionViewCell: UICollectionViewCell {
     }
     func configure(indexPath: IndexPath) {
         let image = UIImage(named: "Italy1")!
-        switch indexPath.item % 4 {
+        switch indexPath.item % 3 {
         case 0:
             configureWithViewAsImage(image: image)
         case 1:
             configureWithViewAsOverlay(image: image)
-        case 2:
-            configureWithContentOverlayViewProperty(image: image)
+        // case 2:
+        //     configureWithContentOverlayViewProperty(image: image)
         default:
-            configureWithBuiltInProtocols(image: image)
+            configureWithBuiltInProtocols(image: image, indexPath: indexPath)
         }
     }
     private func configureWithViewAsImage(image: UIImage) {
@@ -79,11 +79,11 @@ final class CollectionViewCell: UICollectionViewCell {
         let overlays: [OverlayProtocol] = [ViewAsOverlay()]
         imageView.io.addOverlays(with: image, overlays: overlays)
     }
-    private func configureWithContentOverlayViewProperty(image: UIImage) {
-        imageView.image = image
-        imageView.io.overlayContentView = ViewAsOverlay().view
-    }
-    private func configureWithBuiltInProtocols(image: UIImage) {
+     // private func configureWithContentOverlayViewProperty(image: UIImage) {
+     //     imageView.image = image
+     //     imageView.io.overlayContentView = ViewAsOverlay().view
+     // }
+    private func configureWithBuiltInProtocols(image: UIImage, indexPath: IndexPath) {
         let size = imageView.bounds.size
         let blackFillOverlay = FillAspectRatioOverlay(image: image, size: size)
         let gradientStartY: CGFloat = 0.6
@@ -91,7 +91,7 @@ final class CollectionViewCell: UICollectionViewCell {
                       UIColor(red: 0, green: 0, blue: 0, alpha: 1)]
         let alphaOverlay = AlphaGradientOverlay(size: size, position: .bottom(gradientStartY: gradientStartY), colors: colors)
         let textOrigin = CGPoint(x: 16, y: imageView.frame.height - 22 - 22)
-        let textOverlay = TextOverlay(text: "CATCHUP", font: UIFont.boldSystemFont(ofSize: 22), foregroundColor: .white, size: size, textOrigin: textOrigin)
+        let textOverlay = TextOverlay(text: "CATCHUP: #\(indexPath.item)", font: UIFont.boldSystemFont(ofSize: 22), foregroundColor: .white, size: size, textOrigin: textOrigin)
         let overlays: [OverlayProtocol] = [blackFillOverlay, alphaOverlay, textOverlay]
         imageView.io.addOverlays(with: image, overlays: overlays)
     }

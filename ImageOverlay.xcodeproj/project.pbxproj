@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F148DC21FB55F4600A5952F /* ImageOverlayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F148DC11FB55F4600A5952F /* ImageOverlayTests.swift */; };
+		1F148DC41FB55F4600A5952F /* ImageOverlay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FF49A461FB39719000DF87E /* ImageOverlay.framework */; };
+		1F148DCB1FB55F7D00A5952F /* AnyViewAsOverlayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F148DCA1FB55F7D00A5952F /* AnyViewAsOverlayTests.swift */; };
 		1F1949E31FB3EE7D008AF2F2 /* OverlayViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1949E21FB3EE7D008AF2F2 /* OverlayViewProtocol.swift */; };
 		1F1949E51FB40D09008AF2F2 /* AnyViewAsOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1949E41FB40D09008AF2F2 /* AnyViewAsOverlay.swift */; };
 		1F4A78F71FB3BB960070C1CC /* OverlayProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4A78F61FB3BB960070C1CC /* OverlayProtocol.swift */; };
@@ -27,6 +30,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		1F148DC51FB55F4600A5952F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1FF49A3D1FB39719000DF87E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1FF49A451FB39719000DF87E;
+			remoteInfo = ImageOverlay;
+		};
 		1FF49A6A1FB39D13000DF87E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1FF49A3D1FB39719000DF87E /* Project object */;
@@ -51,6 +61,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1F148DBF1FB55F4600A5952F /* ImageOverlayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageOverlayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F148DC11FB55F4600A5952F /* ImageOverlayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageOverlayTests.swift; sourceTree = "<group>"; };
+		1F148DC31FB55F4600A5952F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1F148DCA1FB55F7D00A5952F /* AnyViewAsOverlayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyViewAsOverlayTests.swift; sourceTree = "<group>"; };
 		1F1949E21FB3EE7D008AF2F2 /* OverlayViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayViewProtocol.swift; sourceTree = "<group>"; };
 		1F1949E41FB40D09008AF2F2 /* AnyViewAsOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyViewAsOverlay.swift; sourceTree = "<group>"; };
 		1F4A78F61FB3BB960070C1CC /* OverlayProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayProtocol.swift; sourceTree = "<group>"; };
@@ -74,6 +88,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		1F148DBC1FB55F4600A5952F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F148DC41FB55F4600A5952F /* ImageOverlay.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1FF49A421FB39719000DF87E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -91,11 +113,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F148DC01FB55F4600A5952F /* ImageOverlayTests */ = {
+			isa = PBXGroup;
+			children = (
+				1F148DC11FB55F4600A5952F /* ImageOverlayTests.swift */,
+				1F148DCA1FB55F7D00A5952F /* AnyViewAsOverlayTests.swift */,
+				1F148DC31FB55F4600A5952F /* Info.plist */,
+			);
+			path = ImageOverlayTests;
+			sourceTree = "<group>";
+		};
 		1FF49A3C1FB39719000DF87E = {
 			isa = PBXGroup;
 			children = (
 				1FF49A481FB39719000DF87E /* ImageOverlay */,
 				1FF49A5A1FB39A03000DF87E /* Example */,
+				1F148DC01FB55F4600A5952F /* ImageOverlayTests */,
 				1FF49A471FB39719000DF87E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -105,6 +138,7 @@
 			children = (
 				1FF49A461FB39719000DF87E /* ImageOverlay.framework */,
 				1FF49A591FB39A03000DF87E /* Example.app */,
+				1F148DBF1FB55F4600A5952F /* ImageOverlayTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -155,6 +189,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		1F148DBE1FB55F4600A5952F /* ImageOverlayTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1F148DC91FB55F4600A5952F /* Build configuration list for PBXNativeTarget "ImageOverlayTests" */;
+			buildPhases = (
+				1F148DBB1FB55F4600A5952F /* Sources */,
+				1F148DBC1FB55F4600A5952F /* Frameworks */,
+				1F148DBD1FB55F4600A5952F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1F148DC61FB55F4600A5952F /* PBXTargetDependency */,
+			);
+			name = ImageOverlayTests;
+			productName = ImageOverlayTests;
+			productReference = 1F148DBF1FB55F4600A5952F /* ImageOverlayTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		1FF49A451FB39719000DF87E /* ImageOverlay */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1FF49A4E1FB39719000DF87E /* Build configuration list for PBXNativeTarget "ImageOverlay" */;
@@ -202,6 +254,10 @@
 				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = toshi0383;
 				TargetAttributes = {
+					1F148DBE1FB55F4600A5952F = {
+						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+					};
 					1FF49A451FB39719000DF87E = {
 						CreatedOnToolsVersion = 9.1;
 						LastSwiftMigration = 0910;
@@ -228,11 +284,19 @@
 			targets = (
 				1FF49A451FB39719000DF87E /* ImageOverlay */,
 				1FF49A581FB39A03000DF87E /* Example */,
+				1F148DBE1FB55F4600A5952F /* ImageOverlayTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		1F148DBD1FB55F4600A5952F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1FF49A441FB39719000DF87E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -252,6 +316,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		1F148DBB1FB55F4600A5952F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F148DCB1FB55F7D00A5952F /* AnyViewAsOverlayTests.swift in Sources */,
+				1F148DC21FB55F4600A5952F /* ImageOverlayTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1FF49A411FB39719000DF87E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -282,6 +355,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		1F148DC61FB55F4600A5952F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1FF49A451FB39719000DF87E /* ImageOverlay */;
+			targetProxy = 1F148DC51FB55F4600A5952F /* PBXContainerItemProxy */;
+		};
 		1FF49A6B1FB39D13000DF87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1FF49A451FB39719000DF87E /* ImageOverlay */;
@@ -301,6 +379,34 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		1F148DC71FB55F4600A5952F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = ImageOverlayTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = jp.toshi0383.ImageOverlayTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 11.1;
+			};
+			name = Debug;
+		};
+		1F148DC81FB55F4600A5952F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = ImageOverlayTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = jp.toshi0383.ImageOverlayTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 11.1;
+			};
+			name = Release;
+		};
 		1FF49A4C1FB39719000DF87E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -488,6 +594,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1F148DC91FB55F4600A5952F /* Build configuration list for PBXNativeTarget "ImageOverlayTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F148DC71FB55F4600A5952F /* Debug */,
+				1F148DC81FB55F4600A5952F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		1FF49A401FB39719000DF87E /* Build configuration list for PBXProject "ImageOverlay" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

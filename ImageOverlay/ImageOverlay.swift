@@ -16,16 +16,29 @@ private struct AssociatedKeys {
 }
 
 extension NameSpace where Base: UIImageView {
+    /// clears overlays
+    /// On tvOS 10 or earlier, this nil-out image property.
+    /// On tvOS 11, this removes added subviews from overlayContentView.
+    /// - NOTE: DO NOT set nil to image property!
+    ///   It causes overlayContentView not scaling on focus.
     public func clearOverlays() {
         if #available(tvOS 11.0, *) {
-            base.overlayContentView.removeAllChildren()
-            base.overlayContentView.layer.removeAllChildren()
-            base.image = nil
+            if let childOverlayView = base._childOverlayView {
+                childOverlayView.removeFromSuperview()
+                base._childOverlayView = nil
+            }
+            // NOTE: This causes overlayContentView not zoomed on focus.
+            // base.image = nil
         } else {
             base.image = nil
         }
     }
-    public func addOverlays(with image: UIImage, overlays: [OverlayProtocol]) {
+    /// add overlays to this UIImageView
+    /// - parameter image: non-nil UIImage
+    /// - parameter overlays: array of OverlayProtocol objects
+    /// - parameter imagePackagingQueue: [optional] specify any queue where you want the image rendering taken place.
+    ///     Dare to use this though. It sometimes causes layers not correctly rendered.
+    public func addOverlays(with image: UIImage, overlays: [OverlayProtocol], imagePackagingQueue: DispatchQueue? = nil) {
         let size = base.bounds.size
         if #available(tvOS 11.0, *) {
             let layersAsImage = overlays.filter { $0.needsRendering }.flatMap { $0.layers }
@@ -33,49 +46,90 @@ extension NameSpace where Base: UIImageView {
             if layersAsImage.isEmpty {
                 base.addOverlays(layers: layersAsOverlay, image: image)
             } else {
-                DispatchQueue.global().async {
+                if let queue = imagePackagingQueue {
+                    queue.async {
+                        guard let packaged = image.packaged(layers: layersAsImage, size: size) else {
+                            return
+                        }
+                        DispatchQueue.main.async {
+                            self.base.addOverlays(layers: layersAsOverlay, image: packaged)
+                        }
+                    }
+                } else {
                     guard let packaged = image.packaged(layers: layersAsImage, size: size) else {
                         return
                     }
-                    DispatchQueue.main.async {
-                        self.base.addOverlays(layers: layersAsOverlay, image: packaged)
-                    }
+                    self.base.addOverlays(layers: layersAsOverlay, image: packaged)
                 }
             }
         } else {
             let layers: [CALayer] = overlays.flatMap { $0.layers }
-            DispatchQueue.global().async {
+            // NOTE: packaged(layers:size) don't have to be on main thread,
+            //   but it sometimes causes issues like CATextLayer not rendered.
+            //   So we're not dispatching to background here.
+
+            if let queue = imagePackagingQueue {
+                queue.async {
+                    guard let packaged = image.packaged(layers: layers, size: size) else {
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        self.base.image = packaged
+                    }
+                }
+            } else {
                 guard let packaged = image.packaged(layers: layers, size: size) else {
                     return
                 }
-                DispatchQueue.main.async {
-                    self.base.image = packaged
-                }
+                self.base.image = packaged
             }
         }
     }
-    public var overlayContentView: UIView? {
-        set {
-            objc_setAssociatedObject(self, &AssociatedKeys.overlayContentView, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            if let image = base.image, let view = newValue {
-                addOverlays(with: image, overlays: [AnyViewAsOverlay(view: view)])
-            }
-        }
-        get {
-            return objc_getAssociatedObject(self, &AssociatedKeys.overlayContentView) as? UIView
-        }
-    }
+    // Disabling this for now.
+    // public var overlayContentView: UIView? {
+    //     set {
+    //         objc_setAssociatedObject(self, &AssociatedKeys.overlayContentView, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+    //         if base.image == nil, newValue != nil {
+    //             assertionFailure("Set image before setting overlayContentView")
+    //         }
+    //         if let image = base.image, let view = newValue {
+    //             addOverlays(with: image, overlays: [AnyViewAsOverlay(view: view)])
+    //         }
+    //     }
+    //     get {
+    //         return objc_getAssociatedObject(self, &AssociatedKeys.overlayContentView) as? UIView
+    //     }
+    // }
 }
 
 extension UIImageView {
+    struct AssociatedKeys {
+        static var _childOverlayView = "ImageOverlay.UIImageView._childOverlayView"
+    }
+    var _childOverlayView: UIView? {
+        set {
+            objc_setAssociatedObject(self, &AssociatedKeys._childOverlayView, newValue, .OBJC_ASSOCIATION_ASSIGN)
+        }
+        get {
+            return objc_getAssociatedObject(self, &AssociatedKeys._childOverlayView) as? UIView
+        }
+    }
     @available(tvOS 11.0, *)
     func addOverlays(layers: [CALayer], image: UIImage) {
         let v = self.overlayContentView
         self.image = image
         v.clipsToBounds = false
-        layers.forEach {
-            v.layer.addSublayer($0)
+        if let existing = _childOverlayView {
+            // Can happen even when clearOverlays is called on prepareForReuse.
+            // Because addOverlays can be called asynchronously.
+            existing.removeFromSuperview()
         }
+        let child = UIView(frame: v.bounds)
+        layers.forEach {
+            child.layer.addSublayer($0)
+        }
+        v.addSubview(child)
+        _childOverlayView = child
     }
 }
 
@@ -96,4 +150,3 @@ extension UIImage {
         return image
     }
 }
-
