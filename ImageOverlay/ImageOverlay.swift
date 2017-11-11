@@ -16,6 +16,11 @@ private struct AssociatedKeys {
 }
 
 extension NameSpace where Base: UIImageView {
+    /// clears overlays
+    /// On tvOS 10 or earlier, this nil-out image property.
+    /// On tvOS 11, this removes added subviews from overlayContentView.
+    /// - NOTE: DO NOT set nil to image property!
+    ///   It causes overlayContentView not scaling on focus.
     public func clearOverlays() {
         if #available(tvOS 11.0, *) {
             if let childOverlayView = base._childOverlayView {
@@ -28,7 +33,12 @@ extension NameSpace where Base: UIImageView {
             base.image = nil
         }
     }
-    public func addOverlays(with image: UIImage, overlays: [OverlayProtocol]) {
+    /// add overlays to this UIImageView
+    /// - parameter image: non-nil UIImage
+    /// - parameter overlays: array of OverlayProtocol objects
+    /// - parameter imagePackagingQueue: [optional] specify any queue where you want the image rendering taken place.
+    ///     Dare to use this though. It sometimes causes layers not correctly rendered.
+    public func addOverlays(with image: UIImage, overlays: [OverlayProtocol], imagePackagingQueue: DispatchQueue? = nil) {
         let size = base.bounds.size
         if #available(tvOS 11.0, *) {
             let layersAsImage = overlays.filter { $0.needsRendering }.flatMap { $0.layers }
@@ -36,13 +46,20 @@ extension NameSpace where Base: UIImageView {
             if layersAsImage.isEmpty {
                 base.addOverlays(layers: layersAsOverlay, image: image)
             } else {
-                DispatchQueue.global().async {
+                if let queue = imagePackagingQueue {
+                    queue.async {
+                        guard let packaged = image.packaged(layers: layersAsImage, size: size) else {
+                            return
+                        }
+                        DispatchQueue.main.async {
+                            self.base.addOverlays(layers: layersAsOverlay, image: packaged)
+                        }
+                    }
+                } else {
                     guard let packaged = image.packaged(layers: layersAsImage, size: size) else {
                         return
                     }
-                    DispatchQueue.main.async {
-                        self.base.addOverlays(layers: layersAsOverlay, image: packaged)
-                    }
+                    self.base.addOverlays(layers: layersAsOverlay, image: packaged)
                 }
             }
         } else {
@@ -50,10 +67,22 @@ extension NameSpace where Base: UIImageView {
             // NOTE: packaged(layers:size) don't have to be on main thread,
             //   but it sometimes causes issues like CATextLayer not rendered.
             //   So we're not dispatching to background here.
-            guard let packaged = image.packaged(layers: layers, size: size) else {
-                return
+
+            if let queue = imagePackagingQueue {
+                queue.async {
+                    guard let packaged = image.packaged(layers: layers, size: size) else {
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        self.base.image = packaged
+                    }
+                }
+            } else {
+                guard let packaged = image.packaged(layers: layers, size: size) else {
+                    return
+                }
+                self.base.image = packaged
             }
-            self.base.image = packaged
         }
     }
     // Disabling this for now.
@@ -121,4 +150,3 @@ extension UIImage {
         return image
     }
 }
-

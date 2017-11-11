@@ -60,13 +60,13 @@ final class CollectionViewCell: UICollectionViewCell {
     }
     func configure(indexPath: IndexPath) {
         let image = UIImage(named: "Italy1")!
-        switch indexPath.item % 4 {
+        switch indexPath.item % 3 {
         case 0:
             configureWithViewAsImage(image: image)
         case 1:
             configureWithViewAsOverlay(image: image)
-        //case 2:
-        //    configureWithContentOverlayViewProperty(image: image)
+        // case 2:
+        //     configureWithContentOverlayViewProperty(image: image)
         default:
             configureWithBuiltInProtocols(image: image, indexPath: indexPath)
         }
