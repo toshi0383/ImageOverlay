@@ -47,14 +47,13 @@ extension NameSpace where Base: UIImageView {
             }
         } else {
             let layers: [CALayer] = overlays.flatMap { $0.layers }
-            DispatchQueue.global().async {
-                guard let packaged = image.packaged(layers: layers, size: size) else {
-                    return
-                }
-                DispatchQueue.main.async {
-                    self.base.image = packaged
-                }
+            // NOTE: packaged(layers:size) don't have to be on main thread,
+            //   but it sometimes causes issues like CATextLayer not rendered.
+            //   So we're not dispatching to background here.
+            guard let packaged = image.packaged(layers: layers, size: size) else {
+                return
             }
+            self.base.image = packaged
         }
     }
     // Disabling this for now.
