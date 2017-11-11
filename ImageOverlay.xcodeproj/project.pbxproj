@@ -12,6 +12,9 @@
 		1F148DCB1FB55F7D00A5952F /* AnyViewAsOverlayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F148DCA1FB55F7D00A5952F /* AnyViewAsOverlayTests.swift */; };
 		1F1949E31FB3EE7D008AF2F2 /* OverlayViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1949E21FB3EE7D008AF2F2 /* OverlayViewProtocol.swift */; };
 		1F1949E51FB40D09008AF2F2 /* AnyViewAsOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1949E41FB40D09008AF2F2 /* AnyViewAsOverlay.swift */; };
+		1F2614FF1FB6F0FC0065CC9E /* FreeLabelOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2614FE1FB6F0FC0065CC9E /* FreeLabelOverlay.swift */; };
+		1F2615011FB6F1460065CC9E /* Utilities2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2615001FB6F1460065CC9E /* Utilities2.swift */; };
+		1F2615021FB6F3DB0065CC9E /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4A78FC1FB3C91B0070C1CC /* Utilities.swift */; };
 		1F4A78F71FB3BB960070C1CC /* OverlayProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4A78F61FB3BB960070C1CC /* OverlayProtocol.swift */; };
 		1F4A78F91FB3BBAA0070C1CC /* TextOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4A78F81FB3BBAA0070C1CC /* TextOverlay.swift */; };
 		1F4A78FB1FB3C8160070C1CC /* AlphaGradientOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4A78FA1FB3C8160070C1CC /* AlphaGradientOverlay.swift */; };
@@ -67,6 +70,8 @@
 		1F148DCA1FB55F7D00A5952F /* AnyViewAsOverlayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyViewAsOverlayTests.swift; sourceTree = "<group>"; };
 		1F1949E21FB3EE7D008AF2F2 /* OverlayViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayViewProtocol.swift; sourceTree = "<group>"; };
 		1F1949E41FB40D09008AF2F2 /* AnyViewAsOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyViewAsOverlay.swift; sourceTree = "<group>"; };
+		1F2614FE1FB6F0FC0065CC9E /* FreeLabelOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeLabelOverlay.swift; sourceTree = "<group>"; };
+		1F2615001FB6F1460065CC9E /* Utilities2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities2.swift; sourceTree = "<group>"; };
 		1F4A78F61FB3BB960070C1CC /* OverlayProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayProtocol.swift; sourceTree = "<group>"; };
 		1F4A78F81FB3BBAA0070C1CC /* TextOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextOverlay.swift; sourceTree = "<group>"; };
 		1F4A78FA1FB3C8160070C1CC /* AlphaGradientOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphaGradientOverlay.swift; sourceTree = "<group>"; };
@@ -171,6 +176,8 @@
 				1FF49A5F1FB39A03000DF87E /* Main.storyboard */,
 				1FF49A621FB39A03000DF87E /* Assets.xcassets */,
 				1FF49A641FB39A03000DF87E /* Info.plist */,
+				1F2614FE1FB6F0FC0065CC9E /* FreeLabelOverlay.swift */,
+				1F2615001FB6F1460065CC9E /* Utilities2.swift */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -346,8 +353,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F2615021FB6F3DB0065CC9E /* Utilities.swift in Sources */,
 				1FF49A5E1FB39A03000DF87E /* ViewController.swift in Sources */,
+				1F2614FF1FB6F0FC0065CC9E /* FreeLabelOverlay.swift in Sources */,
 				1FF49A5C1FB39A03000DF87E /* AppDelegate.swift in Sources */,
+				1F2615011FB6F1460065CC9E /* Utilities2.swift in Sources */,
 				1FF49A691FB39B11000DF87E /* CollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

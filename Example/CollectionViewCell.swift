@@ -60,13 +60,13 @@ final class CollectionViewCell: UICollectionViewCell {
     }
     func configure(indexPath: IndexPath) {
         let image = UIImage(named: "Italy1")!
-        switch indexPath.item % 3 {
+        switch indexPath.item % 4 {
         case 0:
             configureWithViewAsImage(image: image)
         case 1:
             configureWithViewAsOverlay(image: image)
-        // case 2:
-        //     configureWithContentOverlayViewProperty(image: image)
+         case 2:
+            configureWithFreeLabel(image: image)
         default:
             configureWithBuiltInProtocols(image: image, indexPath: indexPath)
         }
@@ -79,10 +79,10 @@ final class CollectionViewCell: UICollectionViewCell {
         let overlays: [OverlayProtocol] = [ViewAsOverlay()]
         imageView.io.addOverlays(with: image, overlays: overlays)
     }
-     // private func configureWithContentOverlayViewProperty(image: UIImage) {
-     //     imageView.image = image
-     //     imageView.io.overlayContentView = ViewAsOverlay().view
-     // }
+    private func configureWithFreeLabel(image: UIImage) {
+        let overlays: [OverlayProtocol] = [FreeLabelOverlay(text: "Free", height: 225, y: 171)]
+        imageView.io.addOverlays(with: image, overlays: overlays)
+    }
     private func configureWithBuiltInProtocols(image: UIImage, indexPath: IndexPath) {
         let size = imageView.bounds.size
         let blackFillOverlay = FillAspectRatioOverlay(image: image, size: size)
