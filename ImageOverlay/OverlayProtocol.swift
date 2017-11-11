@@ -8,8 +8,15 @@
 
 import Foundation
 
+public enum FocusStatus {
+    case always
+    // Not supported yet.
+    // case focused, notFocused,
+}
+
 public protocol OverlayProtocol {
     var layers: [CALayer] { get }
+    var focusStatus: FocusStatus { get }
 
     var needsRendering: Bool { get }
 }
@@ -21,6 +28,9 @@ extension OverlayProtocol {
         } else {
             return true
         }
+    }
+    public var focusStatus: FocusStatus {
+        return .always
     }
 }
 
