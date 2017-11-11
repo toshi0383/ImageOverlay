@@ -29,7 +29,10 @@ extension OverlayViewProtocol {
 
 extension UIView {
     func getLayersRecursively() -> [CALayer] {
+        // NOTE: This recursive layoutIfNeeded() is required.
+        //   Children's frame aren't updated by parent's layoutIfNeeded()
         layoutIfNeeded()
+
         let sublayers = subviews.map { $0.getLayersRecursively() }.flatMap { $0 }
         sublayers.forEach { $0.applySuperLayersFrameOrigin() }
         return [layer] + sublayers
