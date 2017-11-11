@@ -8,8 +8,8 @@
 
 import Foundation
 
-enum Scale {
-    static var value: CGFloat {
+public enum Scale {
+    public static var value: CGFloat {
         if #available(tvOS 11.0, *) {
             return 1
         } else {
@@ -17,4 +17,3 @@ enum Scale {
         }
     }
 }
-
