@@ -36,7 +36,7 @@ extension UIView {
         layoutIfNeeded()
 
         let sublayers = subviews.map { $0.getLayersRecursively() }.flatMap { $0 }
-        sublayers.forEach { $0.applySuperLayersFrameOrigin() }
+        sublayers.forEach { $0.applySuperLayersBoundsOrigin() }
         return [layer] + sublayers
     }
 }
@@ -46,8 +46,8 @@ extension CALayer {
         let origin = CGPoint(x: position.x - bounds.width / 2, y: position.y - bounds.height / 2)
         frame = CGRect(origin: origin, size: bounds.size).scaled(scale)
     }
-    func applySuperLayersFrameOrigin() {
+    func applySuperLayersBoundsOrigin() {
         guard let parent = superlayer else { return }
-        frame = frame.offsetBy(dx: parent.frame.minX, dy: parent.frame.minY)
+        frame = frame.offsetBy(dx: parent.bounds.minX, dy: parent.bounds.minY)
     }
 }

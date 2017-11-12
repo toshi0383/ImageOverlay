@@ -15,7 +15,12 @@ class FreeLabelOverlayTests: XCTestCase {
         let layers = o.layers
         let layer = layers[0]
         let child = layer.sublayers![0]
-        XCTAssertEqual(layer.frame.origin, CGPoint(x: 8, y: 171))
-        XCTAssertEqual(child.frame.origin, CGPoint(x: 8, y: 5))
+        if #available(tvOS 11.0, *) {
+            XCTAssertEqual(layer.frame.origin, CGPoint(x: 8, y: 171))
+            XCTAssertEqual(child.frame.origin, CGPoint(x: 8, y: 5))
+        } else {
+            XCTAssertEqual(layer.frame.origin, CGPoint(x: 16, y: 342))
+            XCTAssertEqual(child.frame.origin, CGPoint(x: 16, y: 10))
+        }
     }
 }

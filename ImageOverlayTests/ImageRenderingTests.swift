@@ -8,6 +8,8 @@
 
 import XCTest
 
+@testable import ImageOverlay
+
 class ImageRenderingTests: XCTestCase {
     private var parentView: UIView! {
         didSet {
@@ -70,13 +72,14 @@ class ImageRenderingTests: XCTestCase {
                 return
         }
 
-        parentView.frame = CGRect(x: 225, y: 100, width: 300, height: 300)
+        // double squares at center
+        parentView.bounds = CGRect(x: 225, y: 100, width: 300, height: 300)
         childView.frame = CGRect(x: 75, y: 75, width: 150, height: 150)
-        parentLayer.frame = CGRect(x: 225, y: 100, width: 300, height: 300)
+        parentLayer.bounds = CGRect(x: 225, y: 100, width: 300, height: 300)
         childLayer.frame = CGRect(x: 75, y: 75, width: 150, height: 150)
 
-        parentView.layer.bounds = parentView.frame
-        parentLayer.bounds = parentLayer.frame
+        childView.layer.applySuperLayersBoundsOrigin()
+        childLayer.applySuperLayersBoundsOrigin()
 
         let layersFromView = [parentView.layer]
         let layers = [parentLayer!]
