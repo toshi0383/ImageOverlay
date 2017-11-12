@@ -41,7 +41,7 @@ private func _freeLabelLayer(text: String, height: CGFloat, y: CGFloat) -> CALay
     layer.cornerRadius = 2 * Scale.value
     layer.contentsScale = UIScreen.main.scale
     layer.backgroundColor = UIColor(hex: 0xF0163A).cgColor
-    layer.frame = layerFrame
+    layer.bounds = layerFrame
     layer.addSublayer(textLayer)
     return layer
 }

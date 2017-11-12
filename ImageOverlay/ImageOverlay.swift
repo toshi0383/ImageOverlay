@@ -42,6 +42,7 @@ extension NameSpace where Base: UIImageView {
         let size = base.bounds.size
         if #available(tvOS 11.0, *) {
             let layersAsImage = overlays.filter { $0.needsRendering }.flatMap { $0.layers }
+            layersAsImage.forEach { $0.sublayers?.forEach { s in s.applySuperLayersBoundsOrigin() } }
             let layersAsOverlay = overlays.filter { !$0.needsRendering }.flatMap { $0.layers }
             if layersAsImage.isEmpty {
                 base.addOverlays(layers: layersAsOverlay, image: image)
@@ -67,6 +68,7 @@ extension NameSpace where Base: UIImageView {
             // NOTE: packaged(layers:size) don't have to be on main thread,
             //   but it sometimes causes issues like CATextLayer not rendered.
             //   So we're not dispatching to background here.
+            layers.forEach { $0.sublayers?.forEach { s in s.applySuperLayersBoundsOrigin() } }
 
             if let queue = imagePackagingQueue {
                 queue.async {

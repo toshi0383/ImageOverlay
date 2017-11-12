@@ -26,11 +26,11 @@ private func _textLayer(text: String, font: UIFont, foregroundColor: UIColor, or
     textLayer.font = font
     textLayer.fontSize = font.pointSize * scale
     textLayer.foregroundColor = foregroundColor.cgColor
-    textLayer.frame = CGRect(origin: scaledOrigin, size: scaledTextSize)
+    textLayer.frame = CGRect(origin: .zero, size: scaledTextSize)
     textLayer.alignmentMode = kCAAlignmentCenter
     textLayer.contentsScale = UIScreen.main.scale
     let _layer = CALayer()
-    _layer.frame = CGRect(origin: .zero, size: size.scaled(scale))
+    _layer.bounds = CGRect(origin: scaledOrigin, size: size.scaled(scale))
     _layer.backgroundColor = UIColor.clear.cgColor
     _layer.contentsScale = UIScreen.main.scale
     _layer.addSublayer(textLayer)

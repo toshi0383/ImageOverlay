@@ -24,7 +24,7 @@ public struct AlphaGradientOverlay: OverlayProtocol {
         layer.endPoint = CGPoint(x: 0.5, y: 1.0)
         layer.colors = colors.map { $0.cgColor }
         let scaledSize = size.scaled(2)
-        layer.frame = CGRect(origin: .zero, size: scaledSize)
+        layer.bounds = CGRect(origin: .zero, size: scaledSize)
         self.layers = [layer]
     }
 }
