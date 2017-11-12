@@ -134,14 +134,13 @@ extension UIImageView {
 }
 
 extension UIImage {
-    fileprivate func packaged(layers: [CALayer], size _size: CGSize) -> UIImage? {
+    func packaged(layers: [CALayer], size _size: CGSize) -> UIImage? {
         let scaledSize = _size.scaled(2)
         let rect = AVMakeRect(aspectRatio: self.size, insideRect: CGRect(origin: .zero, size: scaledSize))
         UIGraphicsBeginImageContextWithOptions(scaledSize, false, UIScreen.main.scale)
         if let context = UIGraphicsGetCurrentContext() {
             self.draw(in: rect)
             for layer in layers {
-                layer.bounds = layer.frame // for OverlayViewProtocol support
                 layer.render(in: context)
             }
         }

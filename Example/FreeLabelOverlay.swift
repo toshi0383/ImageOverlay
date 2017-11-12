@@ -17,8 +17,8 @@ struct FreeLabelOverlay: OverlayProtocol {
 }
 
 private func _freeLabelLayer(text: String, height: CGFloat, y: CGFloat) -> CALayer {
-    let font = UIFont.boldSystemFont(ofSize: 22)
-    let textSize = NSString(string: text).size(withAttributes: [NSAttributedStringKey.font: font]).scaled(Scale.value)
+    let font = UIFont.boldSystemFont(ofSize: 22 * Scale.value)
+    let textSize = NSString(string: text).size(withAttributes: [NSAttributedStringKey.font: font])
     let scaledOrigin = CGPoint(x: 8, y: y).scaled(Scale.value)
     let insets = UIEdgeInsets(horizontal: 8 * Scale.value, vertical: 5 * Scale.value)
     let layerFrame = CGRect(x: scaledOrigin.x,
@@ -33,7 +33,7 @@ private func _freeLabelLayer(text: String, height: CGFloat, y: CGFloat) -> CALay
     textLayer.frame = textLayerFrame
     textLayer.string = text
     textLayer.font = font
-    textLayer.fontSize = font.pointSize * Scale.value
+    textLayer.fontSize = font.pointSize
     textLayer.foregroundColor = UIColor.white.cgColor
     textLayer.contentsScale = UIScreen.main.scale
     textLayer.alignmentMode = kCAAlignmentCenter
