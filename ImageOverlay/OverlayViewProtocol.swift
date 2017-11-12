@@ -17,16 +17,15 @@ extension OverlayViewProtocol {
     // Layers are copied by default here.
     // Otherwise scaled frame would conflict with autolayout, right?
     public var layers: [CALayer] {
-        let layers = view.getLayersRecursively()
-        layers[0].bounds = layers[0].frame
+        var layers = view.getLayersRecursively()
         if #available(tvOS 11.0, *) {
             if needsRendering {
-                layers.dropFirst().forEach { $0.scaleFrame(2) }
                 layers[0].scaleBounds(2)
+                layers.dropFirst().forEach { $0.scaleBounds(2) }
             }
         } else {
             layers[0].scaleBounds(2)
-            layers.dropFirst().forEach {  $0.scaleFrame(2) }
+            layers.dropFirst().forEach {  $0.scaleBounds(2) }
         }
         return layers
     }
@@ -38,9 +37,19 @@ extension UIView {
         //   Children's frame aren't updated by parent's layoutIfNeeded()
         layoutIfNeeded()
 
-        let sublayers = subviews.map { $0.getLayersRecursively() }.flatMap { $0 }
-        sublayers.forEach { $0.applySuperLayersBoundsOriginRecursively() }
-        return [layer] + sublayers
+        var baseLayer: [CALayer] = []
+        if superview == nil {
+            let layer = self.layer
+            layer.bounds = self.frame
+            baseLayer.append(layer)
+        }
+        let childLayers = subviews.map { $0.layer }
+        childLayers.forEach { $0.bounds = CGRect(x: self.frame.minX + $0.frame.origin.x,
+                                                y: self.frame.minY + $0.frame.origin.y,
+                                                width: $0.frame.width,
+                                                height: $0.frame.height) }
+        // TODO: Call recursively
+        return baseLayer + childLayers
     }
 }
 

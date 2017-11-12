@@ -26,10 +26,12 @@ class UIViewTests: XCTestCase {
     
     func testParent() {
         XCTAssertEqual(parent.frame, CGRect(x: 10, y: 10, width: 50, height: 50))
+        XCTAssertEqual(parent.layer.bounds, CGRect(x: 0, y: 0, width: 50, height: 50))
         XCTAssertEqual(parent.layer.frame, CGRect(x: 10, y: 10, width: 50, height: 50))
     }
 
     func testChild() {
+        XCTAssertEqual(child.bounds, CGRect(x: 0, y: 0, width: 30, height: 30))
         XCTAssertEqual(child.frame, CGRect(x: 10, y: 10, width: 30, height: 30))
         XCTAssertEqual(child.layer.frame, CGRect(x: 10, y: 10, width: 30, height: 30))
     }

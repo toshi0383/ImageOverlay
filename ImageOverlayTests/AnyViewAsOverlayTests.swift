@@ -53,11 +53,9 @@ class AnyViewAsOverlayTests: XCTestCase {
             return
         }
         if #available(tvOS 11.0, *) {
-            XCTAssertEqual(layer.bounds, CGRect(x: 0, y: 0, width: 7, height: 7))
-            XCTAssertEqual(layer.frame, CGRect(x: 2, y: 2, width: 7, height: 7))
+            XCTAssertEqual(layer.bounds, CGRect(x: 12, y: 12, width: 7, height: 7))
         } else {
-            XCTAssertEqual(layer.bounds, CGRect(x: 0, y: 0, width: 14, height: 14))
-            XCTAssertEqual(layer.frame, CGRect(x: 4, y: 4, width: 14, height: 14))
+            XCTAssertEqual(layer.bounds, CGRect(x: 24, y: 24, width: 14, height: 14))
         }
     }
 }
