@@ -78,8 +78,8 @@ class ImageRenderingTests: XCTestCase {
         parentLayer.bounds = CGRect(x: 225, y: 100, width: 300, height: 300)
         childLayer.frame = CGRect(x: 75, y: 75, width: 150, height: 150)
 
-        childView.layer.applySuperLayersBoundsOrigin()
-        childLayer.applySuperLayersBoundsOrigin()
+        childView.layer.applySuperLayersBoundsOriginRecursively()
+        childLayer.applySuperLayersBoundsOriginRecursively()
 
         let layersFromView = [parentView.layer]
         let layers = [parentLayer!]

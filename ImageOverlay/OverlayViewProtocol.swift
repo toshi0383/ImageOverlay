@@ -18,12 +18,15 @@ extension OverlayViewProtocol {
     // Otherwise scaled frame would conflict with autolayout, right?
     public var layers: [CALayer] {
         let layers = view.getLayersRecursively()
+        layers[0].bounds = layers[0].frame
         if #available(tvOS 11.0, *) {
             if needsRendering {
-                layers.forEach { $0.scale(2) }
+                layers.dropFirst().forEach { $0.scaleFrame(2) }
+                layers[0].scaleBounds(2)
             }
         } else {
-            layers.forEach { $0.scale(2) }
+            layers[0].scaleBounds(2)
+            layers.dropFirst().forEach {  $0.scaleFrame(2) }
         }
         return layers
     }
@@ -36,18 +39,23 @@ extension UIView {
         layoutIfNeeded()
 
         let sublayers = subviews.map { $0.getLayersRecursively() }.flatMap { $0 }
-        sublayers.forEach { $0.applySuperLayersBoundsOrigin() }
+        sublayers.forEach { $0.applySuperLayersBoundsOriginRecursively() }
         return [layer] + sublayers
     }
 }
 
 extension CALayer {
-    func scale(_ scale: CGFloat) {
-        let origin = CGPoint(x: position.x - bounds.width / 2, y: position.y - bounds.height / 2)
-        frame = CGRect(origin: origin, size: bounds.size).scaled(scale)
+    func scaleBounds(_ scale: CGFloat) {
+        bounds = CGRect(origin: bounds.origin.scaled(scale), size: bounds.size.scaled(scale))
     }
-    func applySuperLayersBoundsOrigin() {
-        guard let parent = superlayer else { return }
+    func scaleFrame(_ scale: CGFloat) {
+        frame = CGRect(origin: frame.origin.scaled(scale), size: frame.size.scaled(scale))
+    }
+    func applySuperLayersBoundsOriginRecursively() {
+        guard let parent = superlayer else {
+            fatalError("Use this method for sublayers only.")
+        }
         frame = frame.offsetBy(dx: parent.bounds.minX, dy: parent.bounds.minY)
+        sublayers?.forEach { $0.applySuperLayersBoundsOriginRecursively() }
     }
 }
