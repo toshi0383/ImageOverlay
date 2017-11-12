@@ -25,7 +25,7 @@ extension OverlayViewProtocol {
             }
         } else {
             layers[0].scaleBounds(2)
-            layers.dropFirst().forEach {  $0.scaleBounds(2) }
+            layers.dropFirst().forEach { $0.scaleBounds(2) }
         }
         return layers
     }

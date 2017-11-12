@@ -43,9 +43,14 @@ extension NameSpace where Base: UIImageView {
         if #available(tvOS 11.0, *) {
             let layersAsImage = overlays.filter { $0.needsRendering }.flatMap { $0.layers }
             layersAsImage.forEach { $0.sublayers?.forEach { s in s.applySuperLayersBoundsOriginRecursively() } }
-            let layersAsOverlay = overlays.filter { !$0.needsRendering }.flatMap { $0.layers }
+            let viewOverlays = overlays.flatMap { $0 as? OverlayViewProtocol }.filter { !$0.needsRendering }
+            let layerOverlays = overlays.filter { ($0 as? OverlayViewProtocol) == nil }.filter { !$0.needsRendering }
+            let views = viewOverlays.flatMap { $0.view }
+            let layers = layerOverlays.flatMap { $0.layers }
+            layers.forEach { $0.frame = $0.bounds; $0.sublayers?.forEach { s in s.applySuperLayersBoundsOriginRecursively() } }
+
             if layersAsImage.isEmpty {
-                base.addOverlays(layers: layersAsOverlay, image: image)
+                base.addOverlays(views: views, layers: layers, image: image)
             } else {
                 if let queue = imagePackagingQueue {
                     queue.async {
@@ -53,14 +58,14 @@ extension NameSpace where Base: UIImageView {
                             return
                         }
                         DispatchQueue.main.async {
-                            self.base.addOverlays(layers: layersAsOverlay, image: packaged)
+                            self.base.addOverlays(views: views, layers: layers, image: packaged)
                         }
                     }
                 } else {
                     guard let packaged = image.packaged(layers: layersAsImage, size: size) else {
                         return
                     }
-                    self.base.addOverlays(layers: layersAsOverlay, image: packaged)
+                    self.base.addOverlays(views: views, layers: layers, image: packaged)
                 }
             }
         } else {
@@ -117,7 +122,7 @@ extension UIImageView {
         }
     }
     @available(tvOS 11.0, *)
-    func addOverlays(layers: [CALayer], image: UIImage) {
+    func addOverlays(views: [UIView], layers: [CALayer], image: UIImage) {
         let v = self.overlayContentView
         self.image = image
         v.clipsToBounds = false
@@ -127,6 +132,9 @@ extension UIImageView {
             existing.removeFromSuperview()
         }
         let child = UIView(frame: v.bounds)
+        views.forEach {
+            child.addSubview($0)
+        }
         layers.forEach {
             child.layer.addSublayer($0)
         }
