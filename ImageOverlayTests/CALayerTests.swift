@@ -18,9 +18,23 @@ class CALayerTests: XCTestCase {
         super.setUp()
         layer = CALayer()
         layer.bounds = CGRect(x: 10, y: 10, width: 30, height: 30)
+        layer.backgroundColor = UIColor.red.cgColor
+        layer.opacity = 0.3
         child = CATextLayer()
         child.frame = CGRect(x: 7.5, y: 7.5, width: 15, height: 15)
+        child.backgroundColor = UIColor.blue.cgColor
         layer.addSublayer(child)
+    }
+    func testNestedLayerOpacity() {
+        let c = CALayer()
+        c.opacity = 1.0
+        child.addSublayer(c)
+        c.backgroundColor = UIColor.black.cgColor
+        c.frame = CGRect(x: 7.5, y: 7.5, width: 15, height: 15)
+        XCTAssertEqual(layer.opacity, 0.3)
+        XCTAssertEqual(child.opacity, 1.0)
+        XCTAssertEqual(c.opacity, 1.0)
+        render([layer])?.dump(name: "opacity")
     }
     func testNestedLayer() {
         XCTAssertEqual(layer.position, CGPoint(x: 0, y: 0))
