@@ -6,7 +6,7 @@
 //  Copyright © 2017 toshi0383. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension CGSize {
     var isAspectRatio16_9: Bool {

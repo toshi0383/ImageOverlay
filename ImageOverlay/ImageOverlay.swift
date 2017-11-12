@@ -42,9 +42,11 @@ extension NameSpace where Base: UIImageView {
         let size = base.bounds.size
         if #available(tvOS 11.0, *) {
             let layersAsImage = overlays.filter { $0.needsRendering }.flatMap { $0.layers }
-            let layersAsOverlay = overlays.filter { !$0.needsRendering }.flatMap { $0.layers }
+            layersAsImage.forEach { $0.sublayers?.forEach { s in s.applySuperLayersBoundsOriginRecursively() } }
+            let overlaysAsOverlays = overlays.filter { !$0.needsRendering }
+
             if layersAsImage.isEmpty {
-                base.addOverlays(layers: layersAsOverlay, image: image)
+                base.addOverlays(overlays: overlaysAsOverlays, image: image)
             } else {
                 if let queue = imagePackagingQueue {
                     queue.async {
@@ -52,14 +54,14 @@ extension NameSpace where Base: UIImageView {
                             return
                         }
                         DispatchQueue.main.async {
-                            self.base.addOverlays(layers: layersAsOverlay, image: packaged)
+                            self.base.addOverlays(overlays: overlaysAsOverlays, image: packaged)
                         }
                     }
                 } else {
                     guard let packaged = image.packaged(layers: layersAsImage, size: size) else {
                         return
                     }
-                    self.base.addOverlays(layers: layersAsOverlay, image: packaged)
+                    self.base.addOverlays(overlays: overlaysAsOverlays, image: packaged)
                 }
             }
         } else {
@@ -67,6 +69,7 @@ extension NameSpace where Base: UIImageView {
             // NOTE: packaged(layers:size) don't have to be on main thread,
             //   but it sometimes causes issues like CATextLayer not rendered.
             //   So we're not dispatching to background here.
+            layers.forEach { $0.sublayers?.forEach { s in s.applySuperLayersBoundsOriginRecursively() } }
 
             if let queue = imagePackagingQueue {
                 queue.async {
@@ -115,7 +118,7 @@ extension UIImageView {
         }
     }
     @available(tvOS 11.0, *)
-    func addOverlays(layers: [CALayer], image: UIImage) {
+    func addOverlays(overlays: [OverlayProtocol], image: UIImage) {
         let v = self.overlayContentView
         self.image = image
         v.clipsToBounds = false
@@ -125,8 +128,23 @@ extension UIImageView {
             existing.removeFromSuperview()
         }
         let child = UIView(frame: v.bounds)
-        layers.forEach {
-            child.layer.addSublayer($0)
+        for overlay in overlays {
+            if let viewOverlay = overlay as? OverlayViewProtocol {
+                if !viewOverlay.needsRendering {
+                    child.addSubview(viewOverlay.view)
+                }
+            } else {
+                if !overlay.needsRendering {
+                    let layers = overlay.layers
+                    layers.forEach {
+                        $0.frame = $0.bounds
+                        $0.sublayers?.forEach { s in s.applySuperLayersBoundsOriginRecursively() }
+                    }
+                    layers.forEach {
+                        child.layer.addSublayer($0)
+                    }
+                }
+            }
         }
         v.addSubview(child)
         _childOverlayView = child
@@ -134,14 +152,13 @@ extension UIImageView {
 }
 
 extension UIImage {
-    fileprivate func packaged(layers: [CALayer], size _size: CGSize) -> UIImage? {
+    func packaged(layers: [CALayer], size _size: CGSize) -> UIImage? {
         let scaledSize = _size.scaled(2)
         let rect = AVMakeRect(aspectRatio: self.size, insideRect: CGRect(origin: .zero, size: scaledSize))
         UIGraphicsBeginImageContextWithOptions(scaledSize, false, UIScreen.main.scale)
         if let context = UIGraphicsGetCurrentContext() {
             self.draw(in: rect)
             for layer in layers {
-                layer.bounds = layer.frame // for OverlayViewProtocol support
                 layer.render(in: context)
             }
         }

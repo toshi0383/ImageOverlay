@@ -14,14 +14,18 @@ public protocol OverlayViewProtocol: OverlayProtocol {
 
 extension OverlayViewProtocol {
     // TODO: Needs test for scaling
+    // Layers are copied by default here.
+    // Otherwise scaled frame would conflict with autolayout, right?
     public var layers: [CALayer] {
-        let layers = view.getLayersRecursively()
+        var layers = view.getLayersRecursively()
         if #available(tvOS 11.0, *) {
             if needsRendering {
-                layers.forEach { $0.scale(2) }
+                layers[0].scaleBounds(2)
+                layers.dropFirst().forEach { $0.scaleBounds(2) }
             }
         } else {
-            layers.forEach { $0.scale(2) }
+            layers[0].scaleBounds(2)
+            layers.dropFirst().forEach { $0.scaleBounds(2) }
         }
         return layers
     }
@@ -33,19 +37,34 @@ extension UIView {
         //   Children's frame aren't updated by parent's layoutIfNeeded()
         layoutIfNeeded()
 
-        let sublayers = subviews.map { $0.getLayersRecursively() }.flatMap { $0 }
-        sublayers.forEach { $0.applySuperLayersFrameOrigin() }
-        return [layer] + sublayers
+        var baseLayer: [CALayer] = []
+        if superview == nil {
+            let layer = self.layer
+            layer.bounds = self.frame
+            baseLayer.append(layer)
+        }
+        let childLayers = subviews.map { $0.layer }
+        childLayers.forEach { $0.bounds = CGRect(x: self.frame.minX + $0.frame.origin.x,
+                                                y: self.frame.minY + $0.frame.origin.y,
+                                                width: $0.frame.width,
+                                                height: $0.frame.height) }
+        // TODO: Call recursively
+        return baseLayer + childLayers
     }
 }
 
 extension CALayer {
-    func scale(_ scale: CGFloat) {
-        let origin = CGPoint(x: position.x - bounds.width / 2, y: position.y - bounds.height / 2)
-        frame = CGRect(origin: origin, size: bounds.size).scaled(scale)
+    func scaleBounds(_ scale: CGFloat) {
+        bounds = CGRect(origin: bounds.origin.scaled(scale), size: bounds.size.scaled(scale))
     }
-    func applySuperLayersFrameOrigin() {
-        guard let parent = superlayer else { return }
-        frame = frame.offsetBy(dx: parent.frame.minX, dy: parent.frame.minY)
+    func scaleFrame(_ scale: CGFloat) {
+        frame = CGRect(origin: frame.origin.scaled(scale), size: frame.size.scaled(scale))
+    }
+    func applySuperLayersBoundsOriginRecursively() {
+        guard let parent = superlayer else {
+            fatalError("Use this method for sublayers only.")
+        }
+        frame = frame.offsetBy(dx: parent.bounds.minX, dy: parent.bounds.minY)
+        sublayers?.forEach { $0.applySuperLayersBoundsOriginRecursively() }
     }
 }

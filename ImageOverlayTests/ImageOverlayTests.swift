@@ -8,11 +8,7 @@
 
 import XCTest
 
+@testable import ImageOverlay
+
 class ImageOverlayTests: XCTestCase {
-    
-    override func setUp() {
-        super.setUp()
-    }
-    func testExample() {
-    }
 }
