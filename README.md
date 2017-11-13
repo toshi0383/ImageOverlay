@@ -42,18 +42,18 @@ Demonstrated overlays
 NOTE: Everything is rendered as image on tvOS 10 or earlier.
 
 # How to use
-## CALayer based overlay
+## `OverlayProtocol`: CALayer based overlay
 Conform to either `OverlayProtocol` to define your own overlay.  
 Make sure to set `bounds` on toplevel layer, and set `frame` to sublayers.
 
 See [TextOverlay.swift](ImageOverlay/TextOverlay.swift) for example.
 
-## UIView based overlay
+## `OverlayViewProtocol`: UIView based overlay
 Conform to `OverlayViewProtocol` for view based overlay.
 
 See [ExampleOverlays.swift](Example/ExampleOverlays.swift) for example.
 
-## needsRendering
+## `needsRendering`: always render as image
 Return `true` in `needsRendering` to always render layers or views as image.
 
 # LICENSE
