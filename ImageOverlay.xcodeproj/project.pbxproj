@@ -21,6 +21,7 @@
 		1F23DFAF1FB7E00B0060A94B /* ImageRenderingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F23DFAE1FB7E00B0060A94B /* ImageRenderingTests.swift */; };
 		1F23DFB11FB7E8DC0060A94B /* Utilities3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F23DFB01FB7E8DC0060A94B /* Utilities3.swift */; };
 		1F23DFB31FB7EA700060A94B /* Italy1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1F23DFB21FB7EA700060A94B /* Italy1.jpg */; };
+		1F23DFD01FB925B40060A94B /* ExampleOverlays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F23DFCF1FB925B40060A94B /* ExampleOverlays.swift */; };
 		1F2614FF1FB6F0FC0065CC9E /* FreeLabelOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2614FE1FB6F0FC0065CC9E /* FreeLabelOverlay.swift */; };
 		1F2615011FB6F1460065CC9E /* Utilities2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2615001FB6F1460065CC9E /* Utilities2.swift */; };
 		1F2615021FB6F3DB0065CC9E /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4A78FC1FB3C91B0070C1CC /* Utilities.swift */; };
@@ -85,6 +86,7 @@
 		1F23DFAE1FB7E00B0060A94B /* ImageRenderingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRenderingTests.swift; sourceTree = "<group>"; };
 		1F23DFB01FB7E8DC0060A94B /* Utilities3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities3.swift; sourceTree = "<group>"; };
 		1F23DFB21FB7EA700060A94B /* Italy1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Italy1.jpg; path = Example/Assets.xcassets/Italy1.imageset/Italy1.jpg; sourceTree = SOURCE_ROOT; };
+		1F23DFCF1FB925B40060A94B /* ExampleOverlays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleOverlays.swift; sourceTree = "<group>"; };
 		1F2614FE1FB6F0FC0065CC9E /* FreeLabelOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeLabelOverlay.swift; sourceTree = "<group>"; };
 		1F2615001FB6F1460065CC9E /* Utilities2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities2.swift; sourceTree = "<group>"; };
 		1F4A78F61FB3BB960070C1CC /* OverlayProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayProtocol.swift; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 				1FF49A641FB39A03000DF87E /* Info.plist */,
 				1F2614FE1FB6F0FC0065CC9E /* FreeLabelOverlay.swift */,
 				1F2615001FB6F1460065CC9E /* Utilities2.swift */,
+				1F23DFCF1FB925B40060A94B /* ExampleOverlays.swift */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -389,6 +392,7 @@
 				1FF49A5C1FB39A03000DF87E /* AppDelegate.swift in Sources */,
 				1F2615011FB6F1460065CC9E /* Utilities2.swift in Sources */,
 				1FF49A691FB39B11000DF87E /* CollectionViewCell.swift in Sources */,
+				1F23DFD01FB925B40060A94B /* ExampleOverlays.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
