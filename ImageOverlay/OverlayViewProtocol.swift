@@ -14,8 +14,6 @@ public protocol OverlayViewProtocol: OverlayProtocol {
 
 extension OverlayViewProtocol {
     // TODO: Needs test for scaling
-    // Layers are copied by default here.
-    // Otherwise scaled frame would conflict with autolayout, right?
     public var layers: [CALayer] {
         var layers = view.getLayersRecursively()
         if #available(tvOS 11.0, *) {

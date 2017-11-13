@@ -9,6 +9,21 @@
 import ImageOverlay
 import UIKit
 
+struct ViewAsImage: OverlayViewProtocol {
+    let needsRendering: Bool = true
+    var view: UIView {
+        let frame = CGRect(x: 0, y: 0, width: 400, height: 225)
+        let v = UIView(frame: frame)
+        v.backgroundColor = .red
+        v.alpha = 0.3
+        let child = UIView(frame: CGRect(x: 150, y: 62.5, width: 100, height: 100))
+        child.backgroundColor = .blue
+        child.alpha = 1.0
+        v.addSubview(child)
+        return v
+    }
+}
+
 /// On tvOS10 or earlier, this is treated as ViewAsImage anyways.
 /// Set needsRendering to true if you want this view rendered as UIImage on tvOS11.
 ///
@@ -18,7 +33,7 @@ import UIKit
 ///   and return layers separatedly.
 struct ViewAsOverlay: OverlayViewProtocol {
     var view: UIView {
-        let frame = CGRect(x: 100.25, y: 0, width: 200, height: 112.5)
+        let frame = CGRect(x: 0, y: 0, width: 400, height: 225)
         let v = UIView(frame: frame)
         v.backgroundColor = .red
         v.alpha = 0.3
@@ -30,24 +45,9 @@ struct ViewAsOverlay: OverlayViewProtocol {
         NSLayoutConstraint.activate([
             child.centerXAnchor.constraint(equalTo: v.centerXAnchor),
             child.centerYAnchor.constraint(equalTo: v.centerYAnchor),
-            child.widthAnchor.constraint(equalToConstant: 50),
-            child.heightAnchor.constraint(equalToConstant: 50),
+            child.widthAnchor.constraint(equalToConstant: 100),
+            child.heightAnchor.constraint(equalToConstant: 100),
         ])
-        return v
-    }
-}
-
-struct ViewAsImage: OverlayViewProtocol {
-    let needsRendering: Bool = true
-    var view: UIView {
-        let frame = CGRect(x: 0, y: 190, width: 400, height: 35)
-        let v = UIView(frame: frame)
-        v.backgroundColor = .green
-        v.alpha = 0.4
-        let child = UIView(frame: CGRect(x: 100, y: 8.75, width: 200, height: 17.5))
-        child.backgroundColor = .white
-        child.alpha = 1.0
-        v.addSubview(child)
         return v
     }
 }
@@ -65,31 +65,34 @@ final class CollectionViewCell: UICollectionViewCell {
         imageView.io.clearOverlays()
     }
     func configure(indexPath: IndexPath) {
-        let image = UIImage(named: "Italy1")!
         switch indexPath.item % 4 {
         case 0:
-            configureWithViewAsImage(image: image)
+            configureWithViewAsImage()
         case 1:
-            configureWithViewAsOverlay(image: image)
-         case 2:
-            configureWithFreeLabel(image: image)
+            configureWithViewAsOverlay()
+        case 2:
+            configureWithFreeLabel()
         default:
-            configureWithBuiltInProtocols(image: image, indexPath: indexPath)
+            configureWithBuiltInOverlays(indexPath: indexPath)
         }
     }
-    private func configureWithViewAsImage(image: UIImage) {
+    private func configureWithViewAsImage() {
+        let image = UIImage(named: "High Sierra")!
         let overlays: [OverlayProtocol] = [ViewAsImage()]
         imageView.io.addOverlays(with: image, overlays: overlays)
     }
-    private func configureWithViewAsOverlay(image: UIImage) {
+    private func configureWithViewAsOverlay() {
+        let image = UIImage(named: "High Sierra")!
         let overlays: [OverlayProtocol] = [ViewAsOverlay()]
         imageView.io.addOverlays(with: image, overlays: overlays)
     }
-    private func configureWithFreeLabel(image: UIImage) {
+    private func configureWithFreeLabel() {
+        let image = UIImage(named: "High Sierra")!
         let overlays: [OverlayProtocol] = [FreeLabelOverlay(text: "Free", height: 225, y: 171)]
         imageView.io.addOverlays(with: image, overlays: overlays)
     }
-    private func configureWithBuiltInProtocols(image: UIImage, indexPath: IndexPath) {
+    private func configureWithBuiltInOverlays(indexPath: IndexPath) {
+        let image = UIImage(named: "Italy1")!
         let size = imageView.bounds.size
         let blackFillOverlay = FillAspectRatioOverlay(image: image, size: size)
         let gradientStartY: CGFloat = 0.6
@@ -100,5 +103,14 @@ final class CollectionViewCell: UICollectionViewCell {
         let textOverlay = TextOverlay(text: "CATCHUP: #\(indexPath.item)", font: UIFont.boldSystemFont(ofSize: 22), foregroundColor: .white, size: size, textOrigin: textOrigin)
         let overlays: [OverlayProtocol] = [blackFillOverlay, alphaOverlay, textOverlay]
         imageView.io.addOverlays(with: image, overlays: overlays)
+    }
+
+    override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+        if context.nextFocusedView == self {
+            self.layer.zPosition = 0.1
+        } else {
+            self.layer.zPosition = 0.0
+        }
+        super.didUpdateFocus(in: context, with: coordinator)
     }
 }
