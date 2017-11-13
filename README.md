@@ -12,7 +12,8 @@ Provides `overlayContentView`(ish) for tvOS10 or earlier.
 )](http://mit-license.org)
 
 In tvOS 11, UIImageView has `overlayContentView` to display custom UI over an UIImageView, while still enabling nice motion effect.
-[![wwdc2017-209](https://github.com/toshi0383/assets/blob/master/ImageOverlay/wwdc2017-209.png?raw=true)](https://developer.apple.com/videos/play/wwdc2017/209/)
+
+[<img src='https://github.com/toshi0383/assets/blob/master/ImageOverlay/wwdc2017-209.png?raw=true' width='400' />](https://developer.apple.com/videos/play/wwdc2017/209/)
 
 This library provides the similar functionality for tvOS 9 or 10.
 
