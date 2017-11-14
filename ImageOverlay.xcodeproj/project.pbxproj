@@ -40,6 +40,7 @@
 		1FF49A631FB39A03000DF87E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FF49A621FB39A03000DF87E /* Assets.xcassets */; };
 		1FF49A691FB39B11000DF87E /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF49A681FB39B11000DF87E /* CollectionViewCell.swift */; };
 		1FF49A6D1FB39DB6000DF87E /* ImageOverlay.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1FF49A461FB39719000DF87E /* ImageOverlay.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F220A0AA1FBA75BB003F5891 /* CustomCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F220A0A91FBA75BB003F5891 /* CustomCollectionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +108,7 @@
 		1FF49A621FB39A03000DF87E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1FF49A641FB39A03000DF87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1FF49A681FB39B11000DF87E /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		F220A0A91FBA75BB003F5891 /* CustomCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +204,7 @@
 				1F2614FE1FB6F0FC0065CC9E /* FreeLabelOverlay.swift */,
 				1F2615001FB6F1460065CC9E /* Utilities2.swift */,
 				1F23DFCF1FB925B40060A94B /* ExampleOverlays.swift */,
+				F220A0A91FBA75BB003F5891 /* CustomCollectionViewController.swift */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -391,6 +394,7 @@
 				1F2614FF1FB6F0FC0065CC9E /* FreeLabelOverlay.swift in Sources */,
 				1FF49A5C1FB39A03000DF87E /* AppDelegate.swift in Sources */,
 				1F2615011FB6F1460065CC9E /* Utilities2.swift in Sources */,
+				F220A0AA1FBA75BB003F5891 /* CustomCollectionViewController.swift in Sources */,
 				1FF49A691FB39B11000DF87E /* CollectionViewCell.swift in Sources */,
 				1F23DFD01FB925B40060A94B /* ExampleOverlays.swift in Sources */,
 			);
@@ -611,6 +615,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = T47KPZ35V7;
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.toshi0383.Example;
@@ -626,6 +631,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = T47KPZ35V7;
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.toshi0383.Example;

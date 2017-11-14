@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="13529" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rk5-P1-lCR">
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="13196" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="oHt-UK-kdb">
     <device id="appleTV" orientation="landscape">
         <adaptation id="light"/>
     </device>
     <dependencies>
         <deployment identifier="tvOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -39,7 +39,7 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qFg-Yt-EYa">
-                                            <rect key="frame" x="106" y="233" width="278" height="101"/>
+                                            <rect key="frame" x="118" y="233" width="164" height="49"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -70,5 +70,74 @@
             </objects>
             <point key="canvasLocation" x="758" y="553"/>
         </scene>
+        <!--Custom Collection View Controller-->
+        <scene sceneID="jPv-tK-pHU">
+            <objects>
+                <viewController id="oHt-UK-kdb" customClass="CustomCollectionViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="XMQ-Gl-M1h"/>
+                        <viewControllerLayoutGuide type="bottom" id="gMd-mO-Rjj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="oQ5-Hi-6oo">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="never" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Dyw-8F-Nk7">
+                                <rect key="frame" x="0.0" y="315" width="1920" height="450"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="450" id="AHn-Bl-6vF"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="2hX-mZ-2rR">
+                                    <size key="itemSize" width="400" height="400"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="90" minY="0.0" maxX="90" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="2vI-kI-ir1" customClass="CollectionViewCell" customModule="Example" customModuleProvider="target">
+                                        <rect key="frame" x="90" y="25" width="400" height="400"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="400" height="400"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Italy1" adjustsImageWhenAncestorFocused="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SoF-yn-dvq">
+                                                    <rect key="frame" x="0.0" y="0.0" width="400" height="225"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="SoF-yn-dvq" secondAttribute="height" multiplier="16:9" id="zcc-9k-tcR"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="SoF-yn-dvq" firstAttribute="leading" secondItem="2vI-kI-ir1" secondAttribute="leading" id="1Yz-bd-kkB"/>
+                                            <constraint firstItem="SoF-yn-dvq" firstAttribute="top" secondItem="2vI-kI-ir1" secondAttribute="top" id="AR1-c9-I0Q"/>
+                                            <constraint firstAttribute="trailing" secondItem="SoF-yn-dvq" secondAttribute="trailing" id="n6S-L1-zOn"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="imageView" destination="SoF-yn-dvq" id="eIW-Gy-1u4"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="Dyw-8F-Nk7" firstAttribute="centerY" secondItem="oQ5-Hi-6oo" secondAttribute="centerY" id="Pvi-5d-Dbf"/>
+                            <constraint firstItem="Dyw-8F-Nk7" firstAttribute="leading" secondItem="oQ5-Hi-6oo" secondAttribute="leading" id="ugN-MF-xpH"/>
+                            <constraint firstAttribute="trailing" secondItem="Dyw-8F-Nk7" secondAttribute="trailing" id="wwa-XQ-vHC"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="Dyw-8F-Nk7" id="B2b-mN-FUp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dwd-xu-08P" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1127" y="1646"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="Italy1" width="750" height="500"/>
+    </resources>
 </document>
