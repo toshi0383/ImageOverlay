@@ -61,8 +61,8 @@ Conform to `OverlayViewProtocol` for view based overlay.
 
 See [ExampleOverlays.swift](Example/ExampleOverlays.swift) for example.
 
-## `needsRendering`: always render as image
-Return `true` in `needsRendering` to always render layers or views as image.
+## `needsRendering`: always render as image (ignored on tvOS10)
+Return `true` to always render layers or views as image on tvOS11.
 
 # LICENSE
 MIT
