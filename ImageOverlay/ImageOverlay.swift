@@ -121,7 +121,6 @@ extension UIImageView {
     func addOverlays(overlays: [OverlayProtocol], image: UIImage) {
         let v = self.overlayContentView
         self.image = image
-        v.clipsToBounds = false
         if let existing = _childOverlayView {
             // Can happen even when clearOverlays is called on prepareForReuse.
             // Because addOverlays can be called asynchronously.
