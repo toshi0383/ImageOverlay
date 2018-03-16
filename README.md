@@ -1,6 +1,7 @@
 ImageOverlay
 ---
-Provides `overlayContentView`(ish) for tvOS10 or earlier.
+`overlayContentView` made easy and even cooler on tvOS.  
+tvOS10 and earlier is surprisingly supported.
 
 ![](https://github.com/toshi0383/assets/blob/master/ImageOverlay/imageoverlay-tvos11.gif?raw=true)
 
@@ -11,22 +12,24 @@ Provides `overlayContentView`(ish) for tvOS10 or earlier.
 [![License](http://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat
 )](http://mit-license.org)
 
-In tvOS 11, UIImageView has `overlayContentView` to display custom UI over an UIImageView, while still enabling nice motion effect.
+In tvOS 11, `UIImageView` has `overlayContentView` to display custom UI over an `UIImageView`, while still enabling nice motion effect.
 
 [<img src='https://github.com/toshi0383/assets/blob/master/ImageOverlay/wwdc2017-209.png?raw=true' width='400' />](https://developer.apple.com/videos/play/wwdc2017/209/)
 
-This library provides the similar functionality for tvOS 9 or 10.
+With `ImageOverlay.framework`, you can combine your `UIView` overlays with `CALayer` and optionally render them as `UIImage` which will be rendered over the original thumbnail image.
+
+Take a look at [ScreenShots below](#screenshots) and run [Example](Example) app using different tvOS version simulators.
 
 # Features
-- [x] Render CALayer
-- [x] Render UIView
-- [x] Render UIView with autolayout
-- [x] Render multiple overlays
-- [x] Render user defined overlays.
-- [x] [tvOS 11] Choose either `overlayContentView` or rendering as image
-- [x] [Built-in] `FillAspectRatioOverlay`
-- [x] [Built-in] `AlphaGradientOverlay`
-- [x] Customizable image rendering queue (main thread by default)
+- ✅ Render CALayer
+- ✅ Render UIView
+- ✅ Render UIView with autolayout
+- ✅ Render multiple overlays
+- ✅ Render user defined overlays.
+- ✅ [tvOS 11] Choose either `overlayContentView` or render as image
+- ✅ [Built-in] `FillAspectRatioOverlay`
+- ✅ [Built-in] `AlphaGradientOverlay`
+- ✅ Customizable image rendering queue (main thread by default)
 
 # ScreenShots
 Demonstrated overlays
@@ -41,14 +44,14 @@ Demonstrated overlays
 ## tvOS 9 and tvOS 10
 ![](https://github.com/toshi0383/assets/blob/master/ImageOverlay/imageoverlay-tvos10.gif?raw=true)
 
-NOTE: Everything is rendered as image on tvOS 10 or earlier.
+**NOTE**: Everything is rendered as image on tvOS 10 or earlier.
 
 # How to use
 ## Setting and clearing image
 - `imageView.io.addOverlays(with:overlays:)`
 - `imageView.io.clearOverlays()`
 
-NOTE: Don't nil-out imageView.image, otherwise overlayContentView doesn't get motion effects anymore. Seems like Apple's bug and I'm going to file a bug-report. Maybe you should too💪
+**NOTE**: Don't nil-out imageView.image, otherwise overlayContentView doesn't get motion effects anymore. Seems like Apple's bug and I'm going to file a bug-report. Maybe you should too💪
 
 ## `OverlayProtocol`: CALayer based overlay
 Conform to either `OverlayProtocol` to define your own overlay.  
@@ -66,4 +69,3 @@ Return `true` to always render layers or views as image on tvOS11.
 
 # LICENSE
 MIT
-
