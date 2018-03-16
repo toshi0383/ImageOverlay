@@ -7,8 +7,6 @@ tvOS10 and earlier is surprisingly supported.
 
 ![platforms](https://img.shields.io/badge/platforms-tvOS-blue.svg)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![Cocoapods](https://img.shields.io/badge/Cocoapods-compatible-brightgreen.svg)](https://cocoapods.org)
-[![pod](https://img.shields.io/cocoapods/v/ImageOverlay.svg?style=flat)](https://cocoapods.org/pods/ImageOverlay)
 [![License](http://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat
 )](http://mit-license.org)
 
